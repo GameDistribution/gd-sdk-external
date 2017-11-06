@@ -1,1 +1,1 @@
-# My project's README
+The page that can be uploaded to developer.gamedistribution.com for when we want to allow a game to be self-hosted by a developer. Like with Plinga or .io games, which contain ingame payments, authentication services, etc.

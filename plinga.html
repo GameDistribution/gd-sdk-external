@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Plinga.com</title>
+    <script type="application/javascript">
+        // Respond to postMessage from parent frame.
+        window.addEventListener('message', function(event) {
+            // Make sure to set the correct origin domain.
+            var correctOrigin = 'http://localhost';
+
+            // Now we check if the origin domain is correct.
+            if (event.origin !== correctOrigin) return;
+
+            // Did we get data?
+            if (!event.data) return;
+
+            // What kind of data?
+            if (event.data === 'resume') {
+                resumeGame();
+            } else if (event.data === 'pause') {
+                pauseGame();
+            } else if (event.data.referrer) {
+                // Partner can use this referrer domain for affiliate purposes.
+                console.log('referrer received: ' + event.data.referrer);
+            }
+        }, false);
+
+        function resumeGame() {
+            console.log('Partner resumed the game!');
+        }
+
+        function pauseGame() {
+            console.log('Partner paused the game!');
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>
