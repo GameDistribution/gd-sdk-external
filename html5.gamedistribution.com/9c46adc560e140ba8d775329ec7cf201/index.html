@@ -24,7 +24,7 @@
         gameFrame.onload = function() {
             // Create connection with partner, for sending postMessage data.
             // Make sure to set your full proper domain url.
-            var domain = 'http://localhost/';
+            var domain = 'http://play-staging.plinga.de';
             var gameFrameContent = gameFrame.contentWindow;
 
             // Send the referrer domain to the partner, so it's available to them.
@@ -66,7 +66,7 @@
                 a.src = g;
                 m.parentNode.insertBefore(a, m);
             })(window, document, 'script',
-                'https://html5.api.gamedistribution.com/libs/gd/api.js',
+                '//html5.api.gamedistribution.com/libs/gd/api.js',
                 'gdApi');
 
             gdApi(settings);
@@ -77,8 +77,8 @@
         gameFrame.style.margin = 0;
         gameFrame.style.padding = 0;
         gameFrame.style.border = 0;
-        gameFrame.src = 'plinga.html';
-        // gameFrame.src = '//play-staging.plinga.de/game/iframe/23/9/?referrer=' +referrer;
+        gameFrame.src = '//play-staging.plinga.de/game/iframe/23/9/?referrer=' +
+            referrer;
         body.appendChild(gameFrame);
     }());
 
