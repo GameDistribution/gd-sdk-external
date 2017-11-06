@@ -34,8 +34,8 @@
 
             // Load the Gamedistribution.com SDK.
             var settings = {
-                gameId: 'e0b2074386f94e689c4b2c4abd184a50', // Your gameId which is unique for each one of your games; can be found at your Gamedistribution.com account.
-                userId: 'BE563B84-88A2-4D17-9541-A55350303D64-s1', // Your userId which can be found at your Gamedistribution.com account.
+                gameId: '2272513fdcc344a6a5bb90089976ace5', // Your gameId which is unique for each one of your games; can be found at your Gamedistribution.com account.
+                userId: '46FF1E87-9DC1-4E1C-8E32-7B34FFEE11DD-s1', // Your userId which can be found at your Gamedistribution.com account.
                 resumeGame: function() { // Callback function for resuming your game after banner closed
                     // Invoke the resume game method in the game through postMessage API.
                     gameFrameContent.postMessage('resume', domain);
@@ -77,7 +77,7 @@
         gameFrame.style.margin = 0;
         gameFrame.style.padding = 0;
         gameFrame.style.border = 0;
-        gameFrame.src = '//play-staging.plinga.de/game/iframe/23/9/?referrer=' +
+        gameFrame.src = 'http://play-staging.plinga.de/game/iframe/23/9/?referrer=' +
             referrer;
         body.appendChild(gameFrame);
     }());

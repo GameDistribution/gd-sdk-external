@@ -33,3 +33,19 @@ The partner game source location:
 </VirtualHost>
 
 ```
+
+The result is that we can host a game on a publisher portal...
+``` bash
+//spele.nl
+
+```
+and have our game...
+``` bash
+//html5.gamedistribution.com/9c46adc560e140ba8d775329ec7cf201/
+
+```
+talk to our partner game.
+``` bash
+//play-staging.plinga.de/game/iframe/23/9/
+
+```
