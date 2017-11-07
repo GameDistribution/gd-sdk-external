@@ -5,12 +5,11 @@
     <title>Plinga.com</title>
     <script type="application/javascript">
         // Respond to postMessage from parent frame.
+        // Make sure to set the correct origin domain.
+        var origin = 'http://html5.gamedistribution.com';
         window.addEventListener('message', function(event) {
-            // Make sure to set the correct origin domain.
-            var correctOrigin = 'http://html5.gamedistribution.com';
-
             // Now we check if the origin domain is correct.
-            if (event.origin !== correctOrigin) return;
+            if (event.origin !== origin) return;
 
             // Did we get data?
             if (!event.data) return;
@@ -22,17 +21,34 @@
                 pauseGame();
             } else if (event.data.referrer) {
                 // Partner can use this referrer domain for affiliate purposes.
-                console.log('referrer received: ' + event.data.referrer);
+                console.log('[Partner] Publisher domain: ' +
+                    event.data.referrer);
             }
         }, false);
 
         function resumeGame() {
-            console.log('Partner resumed the game!');
+            console.log('[Partner] Partner resumed the game!');
+            // Invoke the game resume method here.
         }
 
         function pauseGame() {
-            console.log('Partner paused the game!');
+            console.log('[Partner] Partner paused the game!');
+            // Invoke the game pause method here.
         }
+
+        // Invoke this requestAdvertisement method to
+        // start an advertisement using the Gamedistribution SDK.
+        function requestAdvertisement() {
+            console.log('[Partner] Partner requests advertisement.');
+            parent.postMessage('requestAdvertisement', origin);
+        }
+
+        (function() {
+            // Call an advertismeent for testing.
+            setTimeout(function() {
+                requestAdvertisement();
+            }, 1000);
+        }());
     </script>
 </head>
 <body>
