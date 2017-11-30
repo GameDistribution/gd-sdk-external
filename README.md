@@ -7,7 +7,7 @@ Our game source location:
 <VirtualHost *:80>
     ServerName html5.gamedistribution.com
     ServerAlias html5.gamedistribution.com
-    DocumentRoot /Users/arthurhulsman/Sites/gamedistribution
+    DocumentRoot [PATH_TO_GAMEDISTRIBUTION]/gamedistribution
     <Location />
             Options FollowSymLinks MultiViews
             Order allow,deny
@@ -23,7 +23,7 @@ The partner game source location:
 <VirtualHost *:80>
     ServerName play-staging.plinga.de
     ServerAlias play-staging.plinga.de
-    DocumentRoot /Users/arthurhulsman/Sites/play-staging
+    DocumentRoot [PATH_TO_GAME]/play-staging
     <Location />
             Options FollowSymLinks MultiViews
             Order allow,deny
