@@ -42,13 +42,6 @@
             console.log('[Partner] Partner requests advertisement.');
             parent.postMessage('requestAdvertisement', origin);
         }
-
-        (function() {
-            // Call an advertismeent for testing.
-            setTimeout(function() {
-                requestAdvertisement();
-            }, 1000);
-        }());
     </script>
 </head>
 <body>

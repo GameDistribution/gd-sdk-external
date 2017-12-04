@@ -54,6 +54,9 @@
             window.GD_OPTIONS = {
                 gameId: '2272513fdcc344a6a5bb90089976ace5', // Your gameId which is unique for each one of your games; can be found at your Gamedistribution.com account.
                 userId: '46FF1E87-9DC1-4E1C-8E32-7B34FFEE11DD-s1', // Your userId which can be found at your Gamedistribution.com account.
+                advertisementSettings: {
+                    autoplay: false,
+                },
                 onEvent: function(event) {
                     switch (event.name) {
                         case 'SDK_GAME_START':
@@ -69,10 +72,10 @@
                             gameFrameContent.postMessage('pause', origin);
                             break;
                         case 'SDK_READY':
-                            console.log('[Gamedistribution.com] Init: ', data);
+                            console.log('[Gamedistribution.com] Init: ', event.data);
                             break;
                         case 'SDK_ERROR':
-                            console.log('[Gamedistribution.com] Error: ', data);
+                            console.log('[Gamedistribution.com] Error: ', event.data);
                             break;
                     }
                 },
