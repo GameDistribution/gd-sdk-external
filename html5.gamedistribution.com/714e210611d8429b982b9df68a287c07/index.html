@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wanderers.io at Gamedistribution.com</title>
+    <style media="all">
+        html, body {
+            height: 100%
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+<script type="application/javascript">
+    (function() {
+        var referrer = getParentDomain();
+        var body = document.body || document.getElementsByTagName('body')[0];
+        var origin = 'https://wanderers.io/';
+        var gameFrame = document.createElement('iframe');
+
+        // Respond to postMessage from game frame.
+        window.addEventListener('message', function(event) {
+
+            // Now we check if the origin domain is correct.
+            // if (event.origin !== origin) return;
+
+            // Did we get data?
+            if (!event.data) return;
+
+            // What kind of data?
+            if (event.data === 'requestAdvertisement') {
+                gdsdk.showBanner();
+            }
+        }, false);
+
+        gameFrame.onload = function() {
+            // Create connection with partner, for sending postMessage data.
+            // Make sure to set your full proper origin url.
+            var gameFrameContent = gameFrame.contentWindow;
+
+            // Send the referrer origin to the partner, so it's available to them.
+            gameFrameContent.postMessage({
+                referrer: referrer,
+            }, origin);
+
+            // Load the Gamedistribution.com HTML5 SDK.
+            window.GD_OPTIONS = {
+                gameId: '714e210611d8429b982b9df68a287c07', // Your gameId which is unique for each one of your games; can be found at your Gamedistribution.com account.
+                userId: '40B02BA4-AB4C-4CE4-BA0E-DF11ABE4F58C-s1', // Your userId which can be found at your Gamedistribution.com account.
+                advertisementSettings: {
+                    autoplay: false,
+                },
+                onEvent: function(event) {
+                    switch (event.name) {
+                        case 'SDK_GAME_START':
+                            // Invoke the resume game method in the game through postMessage API.
+                            gameFrameContent.postMessage('resume', origin);
+                            break;
+                        case 'SDK_GAME_PAUSE':
+                            // Invoke the pause game method in the game through postMessage API.
+                            gameFrameContent.postMessage('pause', origin);
+                            break;
+                        case 'SDK_READY':
+
+                            break;
+                        case 'SDK_ERROR':
+                            console.log('[Gamedistribution.com] Error: ',
+                                event.data);
+                            break;
+                    }
+                },
+            };
+            (function(d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s);
+                js.id = id;
+                js.src = 'https://html5.api.gamedistribution.com/main.min.js';
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'gamedistribution-jssdk'));
+        };
+
+        gameFrame.setAttribute('allowfullscreen', '');
+        gameFrame.style.display = 'block';
+        gameFrame.style.width = '100%';
+        gameFrame.style.height = '100%';
+        gameFrame.style.margin = 0;
+        gameFrame.style.padding = 0;
+        gameFrame.style.border = 0;
+        gameFrame.src = 'https://wanderers.io/gamedistribution.html?referrer=' +
+            referrer;
+        body.appendChild(gameFrame);
+    }());
+
+    function getParentDomain() {
+        const refer = (window.location !== window.parent.location)
+            ? document.referrer.split('/')[2]
+            : document.location.host;
+        return refer.replace(/^(?:https?:\/\/)?(?:www\.)?/i, '').split('/')[0];
+    }
+</script>
+</body>
+</html>
