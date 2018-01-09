@@ -36,7 +36,9 @@
             if (event.data === 'requestAdvertisement') {
                 console.log(
                     '[Gamedistribution.com] Received request from partner, will start advertisement.');
-                gdsdk.showBanner();
+                if (typeof gdsdk !== 'undefined') {
+                    gdsdk.showBanner();
+                }
             }
         }, false);
 
@@ -72,7 +74,9 @@
                             gameFrameContent.postMessage('pause', origin);
                             break;
                         case 'SDK_READY':
+                            // Invoke the ready method in the game through postMessage API.
                             console.log('[Gamedistribution.com] Init: ', event.data);
+                            gameFrameContent.postMessage('ready', origin);
                             break;
                         case 'SDK_ERROR':
                             console.log('[Gamedistribution.com] Error: ', event.data);
