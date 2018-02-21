@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+
+    <meta name="robots" content="index, follow"/>
+    <meta name="revisit-after" content="2 days"/>
+
+    <title></title>
+    <meta name="description" content=""/>
+
+    <meta name="HandheldFriendly" content="True"/>
+    <meta name="MobileOptimized" content="320"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <meta name="msapplication-tap-highlight" content="no"/>
+
+    <link rel="shortcut icon" href="" type="image/png"/>
+
+    <link rel="icon" type="image/png" sizes="32x32" href=""/>
+    <link rel="icon" type="image/png" sizes="16x16" href=""/>
+    <link rel="apple-touch-icon" sizes="180x180" href=""/>
+    <link rel="mask-icon" href="" color="#44a5ab"/>
+    <meta name="msapplication-TileColor" content="#44a5ab"/>
+    <meta name="msapplication-TileImage" content=""/>
+    <meta name="msapplication-config" content=""/>
+    <meta name="theme-color" content="#44a5ab"/>
+
+    <meta property="og:site_name" content=""/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:title" content=""/>
+    <meta property="og:description" content=""/>
+    <meta property="og:url" content=""/>
+    <meta property="og:image" content=""/>
+    <meta property="article:publisher" content=""/>
+
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:title" content=""/>
+    <meta name="twitter:description" content=""/>
+    <meta name="twitter:url" content=""/>
+    <meta name="twitter:image" content=""/>
+    <meta name="twitter:site" content="@"/>
+    <meta property="og:image:width" content=""/>
+    <meta property="og:image:height" content=""/>
+
+</head>
+
+<body>
+
+<!-- The game here -->
+
+<!-- SDK calls -->
+<script type="application/javascript">
+    // Respond to postMessage from parent frame.
+    // Make sure to set the correct origin domain.
+    var origin = 'https://html5.gamedistribution.com';
+    var ready = false;
+    window.addEventListener('message', function(event) {
+        // Now we check if the origin domain is correct.
+        if (event.origin !== origin) return;
+
+        // Did we get data?
+        if (!event.data) return;
+
+        // What kind of data?
+        if (event.data === 'resume') {
+            resumeGame();
+        } else if (event.data === 'pause') {
+            pauseGame();
+        } else if (event.data === 'ready') {
+            ready = true;
+        } else if (event.data === 'error') {
+            // ...
+        } else if (event.data.referrer) {
+            // Partner can use this referrer domain for affiliate purposes.
+            console.log('[Partner] Publisher domain: ' +
+                event.data.referrer);
+        }
+    }, false);
+
+    function resumeGame() {
+        console.log('[Partner] Partner resumed the game!');
+        // Invoke the game resume method here.
+    }
+
+    function pauseGame() {
+        console.log('[Partner] Partner paused the game!');
+        // Invoke the game pause method here.
+    }
+
+    // Invoke this requestAdvertisement method to
+    // start an advertisement using the Gamedistribution SDK.
+    // You can request this method as often you want. We have an interval
+    // setup to avoid getting too many subsequent ads. As this would
+    // give a bad user experience and won't make our ad providers happy.
+    function requestAdvertisement() {
+        console.log('[Partner] Partner requests advertisement.');
+        if (ready) {
+            parent.postMessage('requestAdvertisement', origin);
+        }
+    }
+</script>
+
+</body>
+
+</html>

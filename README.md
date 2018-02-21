@@ -58,6 +58,24 @@ AND/ OR
     SSLCertificateKeyFile /etc/apache2/ssl/localhost.key
 </VirtualHost>
 
+AND/ OR
+
+<VirtualHost *:443>
+    ServerName tankionline.com
+    ServerAlias tankionline.com
+    DocumentRoot [PATH_TO_GAME]/tankionline.com
+    <Location />
+            Options FollowSymLinks MultiViews
+            Order allow,deny
+            Allow from all
+            Require all granted
+    </Location>
+    SSLEngine on
+    SSLCipherSuite ALL:!ADH:!EXPORT56:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP:+eNULL
+    SSLCertificateFile /etc/apache2/ssl/localhost.crt
+    SSLCertificateKeyFile /etc/apache2/ssl/localhost.key
+</VirtualHost>
+
 ```
 
 The result is that we can host a game on a publisher portal...
