@@ -53,11 +53,11 @@
 
 <!-- SDK calls -->
 <script>
-    (function() {
+    (function () {
         var firstRef = true;
         if (window.parent === window) return;
         var origin = '*';
-        window.addEventListener('message', function(event) {
+        window.addEventListener('message', function (event) {
             if (!event.data) return;
             if (event.data === 'resume') {
                 app.adResumeGame();
@@ -68,7 +68,7 @@
                 firstRef = false;
             }
         }, false);
-        app.requestAd = function() {
+        app.requestAd = function () {
             parent.postMessage('requestAdvertisement', origin);
         };
     })();

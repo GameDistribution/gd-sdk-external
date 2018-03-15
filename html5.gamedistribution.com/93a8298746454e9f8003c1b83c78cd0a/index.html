@@ -16,17 +16,19 @@
 </head>
 <body>
 <script type="application/javascript">
-    (function() {
+    (function () {
         var referrer = getParentDomain();
         var body = document.body || document.getElementsByTagName('body')[0];
         var origin = 'https://tankionline.com/';
         var gameFrame = document.createElement('iframe');
 
         // Respond to postMessage from game frame.
-        window.addEventListener('message', function(event) {
+        window.addEventListener('message', function (event) {
 
             // Now we check if the origin domain is correct.
-            // if (event.origin !== origin) return;
+            if (event.origin !== origin) return;
+
+            // console.log('[Gamedistribution.com] Talking to: ' + event.origin);
 
             // Did we get data?
             if (!event.data) return;
@@ -37,7 +39,7 @@
             }
         }, false);
 
-        gameFrame.onload = function() {
+        gameFrame.onload = function () {
             // Create connection with partner, for sending postMessage data.
             // Make sure to set your full proper origin url.
             var gameFrameContent = gameFrame.contentWindow;
@@ -50,32 +52,32 @@
             // Load the Gamedistribution.com HTML5 SDK.
             window.GD_OPTIONS = {
                 gameId: '93a8298746454e9f8003c1b83c78cd0a', // Your gameId which is unique for each one of your games; can be found at your Gamedistribution.com account.
-                userId: '5ED23CB0-3ED7-400D-8F23-A31B88E8898A-s1', // Your userId which can be found at your Gamedistribution.com account.
-                advertisementSettings: {
-                    autoplay: false,
-                },
-                onEvent: function(event) {
+                onEvent: function (event) {
                     switch (event.name) {
                         case 'SDK_GAME_START':
                             // Invoke the resume game method in the game through postMessage API.
+                            // console.log('[Gamedistribution.com] Request to resume the game to partner.');
                             gameFrameContent.postMessage('resume', origin);
                             break;
                         case 'SDK_GAME_PAUSE':
                             // Invoke the pause game method in the game through postMessage API.
+                            // console.log('[Gamedistribution.com] Request to pause the game to partner.');
                             gameFrameContent.postMessage('pause', origin);
                             break;
                         case 'SDK_READY':
                             // Invoke the ready game method in the game through postMessage API.
+                            // console.log('[Gamedistribution.com] Init');
                             gameFrameContent.postMessage('ready', origin);
                             break;
                         case 'SDK_ERROR':
                             // Invoke the error game method in the game through postMessage API.
+                            // console.log('[Gamedistribution.com] Error: ', event.data);
                             gameFrameContent.postMessage('error', origin);
                             break;
                     }
                 },
             };
-            (function(d, s, id) {
+            (function (d, s, id) {
                 var js, fjs = d.getElementsByTagName(s)[0];
                 if (d.getElementById(id)) return;
                 js = d.createElement(s);
